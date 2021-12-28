@@ -1,0 +1,22 @@
+This will contain the steps needed for the various commands
+
+Starting Vagrant
+  vagrant up
+
+Accessing the vagrant machine
+  vagrant ssh
+
+Disconnect from the machine
+  exit
+
+Changing to the synced folder (between the server and local machine)
+  cd /Vagrant
+
+Creating a python virtual environment (new file is created in the vagrant server so that it doesnt sync with the vagrant folder)
+  python -m venv ~/env
+
+Activating the virtual environment
+  source ~/env/bin/activate
+
+Deactivating the virtual environment
+  deactivate
