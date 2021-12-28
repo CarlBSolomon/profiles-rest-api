@@ -20,3 +20,24 @@ Activating the virtual environment
 
 Deactivating the virtual environment
   deactivate
+
+installing the requirements for the project (the filename used is where the versions are all listed. Note: these are not the latest versions but those used in the course)
+  pip install -r requirements.txt
+
+Creating a new Django project (start a project with the name (as per parameter following it), the last dot indicates that the project must be created in the current root locaton else a sub folder is created)
+  django-admin.py startproject profiles_project .
+
+Create one app called profiles_api
+  python manage.py startapp profiles_api
+
+Adding apps to the installed apps of the django project
+  Access the profiles_project(django project) setting files and add new lines to the INSTALLED_APPS section. We added the following
+  'rest_framework', - this is the django rest framework app
+  'rest_framework.authtoken', - this is the auth token app - allows us to use the authentication token that comes with the framework
+  'profiles_api', - this is the manually created app
+
+Starting our development server
+  In the virtual environment folder of the vagrant server type
+  python manage.py runserver 0.0.0.0:8000
+  0.0.0.0 - means make it available on all available network adpaters on our development server
+  8000 says start it on this port
