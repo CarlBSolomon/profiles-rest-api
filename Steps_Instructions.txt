@@ -41,3 +41,21 @@ Starting our development server
   python manage.py runserver 0.0.0.0:8000
   0.0.0.0 - means make it available on all available network adpaters on our development server
   8000 says start it on this port
+
+Stop the development server
+  Ctrl + C
+
+Creating our own custom  user database model and model manager
+  access the models.py file in the app created and import libraries and create classes and objects
+
+setting the django project to use the custom created user database model and manager by accessing the settings file from the django profiles_project and adding the line to the bottom of the file
+  AUTH_USER_MODEL = 'profiles_api.UserProfile'
+
+create migrations and DB
+  this is done from the venv on vagrant server
+    python manage.py makemigrations profiles_api
+
+run migrations
+    python manage.py migrate
+
+  
