@@ -58,4 +58,17 @@ create migrations and DB
 run migrations
     python manage.py migrate
 
-  
+Enabling Django Admin on server
+  Before we do this we need to create a superuser so that it has all access. This is done using the django terminal
+    python manage.py createsuperuser
+    Enter email address
+    Enter name
+    Enter password
+
+Enable Django Admin
+    Add the model to the admin.py file that is automatically created when app is created
+    from profiles_api import models
+
+
+
+    admin.site.register(models.UserProfile) - this tells the django admin to register the userprofile so that is accessible through the interface.
