@@ -1,10 +1,19 @@
 This will contain the steps needed for the various commands
 
-Starting Vagrant
+creating a vagrant file that will determine the type of dev server we want to create
+  in the folder for the project
+  vagrant init ubuntu/bionic64
+  this will create a template vagrantfile with some basic vanilla image settings which we then modified based on the course
+  these modifications are for scripts and settings we want to run whenever we initialise the server
+
+Starting Vagrant server box
   vagrant up
+  this will download the base image from the vagrantfile and then use VM to initiate the server and run the scripts we have customised.
 
 Accessing the vagrant machine
   vagrant ssh
+  this is a virtual machine that resides on our local machine. While its up we can run commands on it that dont run on the local machine.
+  Everytime it is started up it creates a synchronised directory that loads up its folders with all the files from the local project on the local machine that we have created (its the folder within which we have created the machine - aka project folder)
 
 Disconnect from the machine
   exit
@@ -12,11 +21,13 @@ Disconnect from the machine
 Changing to the synced folder (between the server and local machine)
   cd /Vagrant
 
-Creating a python virtual environment (new file is created in the vagrant server so that it doesnt sync with the vagrant folder)
+Creating a python virtual environment (new file is created in the vagrant server home directory so that it doesn't sync with the vagrant folder)
   python -m venv ~/env
+  the path specified is in the home directory and not the synchronised folder so that whenever we create a new virtual machine its using a fresh python environment.
 
 Activating the virtual environment
   source ~/env/bin/activate
+  this is indicated as the env appears as a prefix at the command line. 
 
 Deactivating the virtual environment
   deactivate
@@ -72,3 +83,20 @@ Enable Django Admin
 
 
     admin.site.register(models.UserProfile) - this tells the django admin to register the userprofile so that is accessible through the interface.
+
+
+Creating API views
+  access the views.py file in the app folder
+
+  remove all existing content and add the following
+
+  from rest_framework.views import APIView
+  from rest_framework.response import Response
+  define class and function for the API views
+
+Configuring view URLS
+  create a new urls.py file in the profiles_api folder
+  add it to the url pattern in the urls.py in the django project root folder
+    add include to the import step along with path
+    add a new line under the existing path as
+    path('api/', include('profiles_api.urls'))
