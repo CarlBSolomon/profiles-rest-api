@@ -27,25 +27,29 @@ Creating a python virtual environment (new file is created in the vagrant server
 
 Activating the virtual environment
   source ~/env/bin/activate
-  this is indicated as the env appears as a prefix at the command line. 
+  this is indicated as the env appears as a prefix at the command line.
 
 Deactivating the virtual environment
   deactivate
 
 installing the requirements for the project (the filename used is where the versions are all listed. Note: these are not the latest versions but those used in the course)
   pip install -r requirements.txt
+  before running this we need to ensure that we are in the virtual environment.
 
-Creating a new Django project (start a project with the name (as per parameter following it), the last dot indicates that the project must be created in the current root locaton else a sub folder is created)
+Creating a new Django project (start a project with the name (as per parameter following it), the last dot indicates that the project must be created in the current root location else a sub folder is created)
   django-admin.py startproject profiles_project .
+  profiles_project is the name of the project
 
-Create one app called profiles_api
+Create a Django app called profiles_api
   python manage.py startapp profiles_api
 
-Adding apps to the installed apps of the django project
-  Access the profiles_project(django project) setting files and add new lines to the INSTALLED_APPS section. We added the following
-  'rest_framework', - this is the django rest framework app
-  'rest_framework.authtoken', - this is the auth token app - allows us to use the authentication token that comes with the framework
-  'profiles_api', - this is the manually created app
+
+Enable the app under the Django project. For this we open the settings file in the django project and list the app we want to enable as listed below
+  Adding apps to the installed apps of the django project
+    Access the profiles_project(django project) setting files and add new lines to the INSTALLED_APPS section. We added the following
+    'rest_framework', - this is the django rest framework app
+    'rest_framework.authtoken', - this is the auth token app - allows us to use the authentication token that comes with the framework
+    'profiles_api', - this is the manually created app
 
 Starting our development server
   In the virtual environment folder of the vagrant server type
@@ -58,11 +62,17 @@ Stop the development server
 
 Creating our own custom  user database model and model manager
   access the models.py file in the app created and import libraries and create classes and objects
+  each model corresponds to a table within the database. Django handles the interaction between models and DB so no SQL is needed.
+  Good practise is to always create the models in the models.py file within the app.
+  the default that comes in the app is basic and that is customised.
+
+  For the project we created a user profile model and then a base user manager to tell django how to manage the user model.
 
 setting the django project to use the custom created user database model and manager by accessing the settings file from the django profiles_project and adding the line to the bottom of the file
   AUTH_USER_MODEL = 'profiles_api.UserProfile'
 
 create migrations and DB
+  django manages the DB by using a migration file that cotains all the steps needed to ensure that the database matches the models. Everytime a model is added and/or changed a new migration file needs to be created.
   this is done from the venv on vagrant server
     python manage.py makemigrations profiles_api
 
@@ -70,7 +80,7 @@ run migrations
     python manage.py migrate
 
 Enabling Django Admin on server
-  Before we do this we need to create a superuser so that it has all access. This is done using the django terminal
+  Before we do this we need to create a superuser so that it has all access. This is done using the django terminal by getting to vagrant and activating the python virtual env.
     python manage.py createsuperuser
     Enter email address
     Enter name
@@ -86,6 +96,7 @@ Enable Django Admin
 
 
 Creating API views
+  An API view is the most basic view we can use to build our API. It enables us to describe the logic that makes our end point. it allows us to define the functions that match the standard HTTP methods - get, post, put, patch and delete. We can customise each of these basic functions and create complex logic to control what happens at the API endpoint.
   access the views.py file in the app folder
 
   remove all existing content and add the following
@@ -100,3 +111,13 @@ Configuring view URLS
     add include to the import step along with path
     add a new line under the existing path as
     path('api/', include('profiles_api.urls'))
+    Djnago then uses these values to load up a list of URLS associated with teh API.
+
+serialiser
+  A serialiser is a django feature that allows us to convert data inputs into python objects and vice versa. Like a django form.
+  Create a new file in the profiles_api app called serialisers.py. Good practise to keep all serilaisers in one single file
+  Create a function that allows the name to be defined.
+
+Adding a post function to the APIView
+  Open up the views file and import a few more functions
+  
