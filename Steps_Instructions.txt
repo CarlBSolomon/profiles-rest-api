@@ -120,4 +120,7 @@ serialiser
 
 Adding a post function to the APIView
   Open up the views file and import a few more functions
-  
+
+Viewsets
+  Viewsets allow us to write the logic end points. The difference is that the unlike APIViews Viewsets accept functions that map to common API object actions. Eg: List, Create, Retrieve, Update, partial update, destroy.
+  Viewsets 
