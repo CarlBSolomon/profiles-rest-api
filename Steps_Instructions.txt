@@ -123,4 +123,25 @@ Adding a post function to the APIView
 
 Viewsets
   Viewsets allow us to write the logic end points. The difference is that the unlike APIViews Viewsets accept functions that map to common API object actions. Eg: List, Create, Retrieve, Update, partial update, destroy.
-  Viewsets 
+  Viewsets
+
+
+Building a Profile API
+  We need to first sort out the requirements that we need for planning the API. This would include
+    View all profiles
+    Update a profile
+    Create a profile
+    Delete a profile
+
+  Based on that we would then determine what URLs the API must have. So based on the requirements we would say that if
+    URL has just the first level like /api/profile/ we can
+      View all profiles
+      Create a profile
+    URL has a profile ID - like /api/profile/<profile id>
+      View a specific profile
+      Update the Profile
+      Delete the profile
+
+Creating a profile serializer
+  We need to introduce a model serializer to handle the profile api
+  
