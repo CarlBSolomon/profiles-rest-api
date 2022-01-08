@@ -32,10 +32,10 @@ class UserProfilesSerializer(serializers.ModelSerializer):
         return user
 
 
-    def update(self, instance, validated_data):
-        """Handle updating user accounts"""
-        if password in validated_data:
-            password = validated_data.pop('password')
-            instance.set_password(password)
+class ProfileFeedItemSerializer(serializers.ModelSerializer):
+    """Serializes profile feed item"""
 
-        return super().update(instance, validated_data)
+    class Meta:
+        model = models.ProfileFeedItem
+        fields = ('id', 'user_profile', 'status_text', 'created_on')
+        extra_kwargs = {'user_profile': {'read_only': True}}
